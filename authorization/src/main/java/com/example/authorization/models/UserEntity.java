@@ -19,14 +19,9 @@ import java.util.UUID;
 public class UserEntity {
     @Id
     private UUID id;
-
-    private String firstname;
-
-    private String lastname;
-
+    private String username;
     @Column(unique = true)
     private String phone;
-
     private String email;
     private String password;
 }
