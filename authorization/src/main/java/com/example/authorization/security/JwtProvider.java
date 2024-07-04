@@ -17,11 +17,11 @@ import java.util.Date;
 
 @Slf4j
 @Component
-public class JWTProvider {
+public class JwtProvider {
     private final SecretKey jwtAccessSecret;
     private final SecretKey jwtRefreshSecret;
 
-    public JWTProvider(
+    public JwtProvider(
             @Value("${jwt.secret.access}") String jwtAccessSecret,
             @Value("${jwt.secret.refresh}") String jwtRefreshSecret
     ) {
@@ -63,12 +63,12 @@ public class JWTProvider {
 
     private boolean validateToken(@NonNull String token, SecretKey secret) {
         try {
-            Jwts.parser().verifyWith(secret).build().parse(token);
+            Jwts.parser().verifyWith(secret).build().parseSignedClaims(token);
             return true;
         } catch (JwtException ex) {
-            log.error("Invalid token", ex);
+            log.info("Invalid token");
+            return false;
         }
-        return false;
     }
 
     public Claims getAccessClaims(@NonNull String token) {
