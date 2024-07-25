@@ -6,7 +6,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.UUID;
 
 @Getter
 @Setter
@@ -16,8 +15,9 @@ import java.util.UUID;
 @Table(name = "characteristic")
 public class Characteristic {
     @Id
-    private UUID id;
-    private UUID productId;
-    private UUID characteristicsId;
+    @GeneratedValue
+    private long id;
+    private long productId;
+    private long characteristicsId;
     private String value;
 }

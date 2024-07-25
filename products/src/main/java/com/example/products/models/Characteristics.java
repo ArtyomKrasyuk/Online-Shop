@@ -17,7 +17,8 @@ import java.util.UUID;
 @Table(name = "characteristics")
 public class Characteristics {
     @Id
-    private UUID id;
+    @GeneratedValue
+    private long id;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "category_id", referencedColumnName = "id")
     private Category category;

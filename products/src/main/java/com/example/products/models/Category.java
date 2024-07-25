@@ -7,7 +7,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.List;
-import java.util.UUID;
 
 @Getter
 @Setter
@@ -17,7 +16,8 @@ import java.util.UUID;
 @Table(name = "category")
 public class Category {
     @Id
-    private UUID id;
+    @GeneratedValue
+    private long id;
     private String title;
     @OneToMany(mappedBy = "category", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Product> products;

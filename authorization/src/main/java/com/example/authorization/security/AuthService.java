@@ -51,6 +51,7 @@ public class AuthService {
         if(userRepository.existsUserByEmail(auth.getEmail())) throw new AuthException("Email already taken");
         if(userRepository.existsUserByPhone(auth.getPhone())) throw new AuthException("Phone already taken");
         UUID uuid = UUID.randomUUID();
+        while(userRepository.existsById(uuid)) uuid = UUID.randomUUID();
         User user = new User(uuid, auth.getUsername(), auth.getPhone(), auth.getEmail(), auth.getPassword());
         userRepository.save(user);
         String accessToken = provider.generateAccessToken(user);
