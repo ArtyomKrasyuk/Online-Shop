@@ -6,7 +6,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.UUID;
 
 @Getter
 @Setter
@@ -16,7 +15,8 @@ import java.util.UUID;
 @Table(name = "filter")
 public class Filter {
     @Id
-    private UUID id;
+    @GeneratedValue
+    private long id;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "category_id", referencedColumnName = "id")
     private Category category;

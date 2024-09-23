@@ -6,7 +6,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.UUID;
 
 @Getter
 @Setter
@@ -15,9 +14,15 @@ import java.util.UUID;
 @Entity
 @Table(name = "characteristic")
 public class Characteristic {
-    @Id
-    private UUID id;
-    private UUID productId;
-    private UUID characteristicsId;
+    @EmbeddedId
+    private CharacteristicKey id;
+    @ManyToOne
+    @MapsId("productId")
+    @JoinColumn(name = "product_id")
+    private Product product;
+    @ManyToOne
+    @MapsId("characteristicsId")
+    @JoinColumn(name = "characteristics_id")
+    private Characteristics characteristic;
     private String value;
 }

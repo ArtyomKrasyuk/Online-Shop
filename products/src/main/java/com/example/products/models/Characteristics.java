@@ -7,7 +7,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.Set;
-import java.util.UUID;
 
 @Getter
 @Setter
@@ -17,11 +16,12 @@ import java.util.UUID;
 @Table(name = "characteristics")
 public class Characteristics {
     @Id
-    private UUID id;
+    @GeneratedValue
+    private long id;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "category_id", referencedColumnName = "id")
     private Category category;
     private String title;
-    @ManyToMany(mappedBy = "characteristics")
-    private Set<Product> products;
+    @OneToMany(mappedBy = "characteristic")
+    private Set<Characteristic> characteristics;
 }
